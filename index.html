@@ -438,6 +438,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#venv-vs-pipenv" class="md-nav__link">
+    <span class="md-ellipsis">
+      venv vs. Pipenv
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -469,6 +478,101 @@ docs/
     index.md  # The documentation homepage.
     ...       # Other markdown pages, images and other files.
 </code></pre></div>
+<hr />
+<div class="admonition question">
+<p class="admonition-title">i'm using python venv can i replace with pipenv</p>
+</div>
+<p>Yes, you can replace Python's built-in venv with Pipenv if you'd like. Here's a comparison of both and how you can transition:</p>
+<h2 id="venv-vs-pipenv"><code>venv</code> vs. <code>Pipenv</code></h2>
+<ol>
+<li>
+<p><code>venv</code>:</p>
+<ul>
+<li>
+<p><code>venv</code> is a built-in tool in Python (since version 3.3) that helps you create isolated environments for your projects.</p>
+</li>
+<li>
+<p>It's lightweight and simple to use, but you need to manage dependencies manually using pip and requirements.txt.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>Pipenv</code>:</p>
+<ul>
+<li>
+<p><code>Pipenv</code> is a higher-level tool that manages virtual environments and dependencies more efficiently.</p>
+</li>
+<li>
+<p>It automatically creates and manages a virtual environment for your project.</p>
+</li>
+<li>
+<p>It handles both the <code>Pipfile</code> (for dependency management) and <code>Pipfile.lock</code> (for deterministic installs).</p>
+</li>
+<li>
+<p>It also integrates with <code>pip</code> for installing packages, but offers more features like checking for security vulnerabilities in your dependencies.</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<details class="tip" open="open">
+<summary>Steps to Replace <code>venv</code> with <code>Pipenv</code></summary>
+<ol>
+<li>
+<p><strong>Install Pipenv</strong> (if you haven't already):</p>
+<div class="language-bash highlight"><span class="filename">bash</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Remove the current <code>venv</code></strong> (if you already have one):</p>
+<ul>
+<li>Simply delete the <code>venv</code> folder from your project directory.</li>
+</ul>
+</li>
+<li>
+<p><strong>Create a new Pipenv environment</strong>: Navigate to your project directory, and then run:</p>
+<div class="language-bash highlight"><span class="filename">bash</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pipenv<span class="w"> </span>install
+</span></code></pre></div>
+<p>This will create a new virtual environment and also generate a <code>Pipfile</code> if it doesn't already exist.</p>
+</li>
+<li>
+<p><strong>Install dependencies</strong>:</p>
+<ul>
+<li>
+<p>If you want to install dependencies, just use:</p>
+<div class="language-bash highlight"><span class="filename">bash</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pipenv<span class="w"> </span>install<span class="w"> </span>&lt;package-name&gt;
+</span></code></pre></div>
+<p>This will install the package and update your <code>Pipfile</code> and <code>Pipfile.lock</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Activate the virtual environment</strong>: To activate the virtual environment created by Pipenv:</p>
+<div class="language-bash highlight"><span class="filename">bash</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pipenv<span class="w"> </span>shell
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>To install dependencies from a <code>Pipfile.lock</code></strong> (if you have one):</p>
+<div class="language-bash highlight"><span class="filename">bash</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pipenv<span class="w"> </span>install<span class="w"> </span>--dev<span class="w">  </span><span class="c1"># If it&#39;s a development dependency or just &#39;pipenv install&#39;</span>
+</span></code></pre></div>
+</li>
+</ol>
+</details>
+<hr />
+<details class="note" open="open">
+<summary>Notes:</summary>
+<ul>
+<li>
+<p>If you were using <code>requirements.txt</code> previously, you can still generate one from <code>Pipenv</code> with:</p>
+<div class="language-bash highlight"><span class="filename">bash</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pipenv<span class="w"> </span>lock<span class="w"> </span>-r<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+</li>
+<li>
+<p>When using <code>Pipenv</code>, it will automatically create a virtual environment in the background, so you don't need to explicitly manage the virtual environment like you do with <code>venv</code>.</p>
+</li>
+</ul>
+</details>
+<p>Pipenv gives you a more streamlined experience for handling both virtual environments and dependencies. It's useful for teams or larger projects where dependency management and consistency are crucial.</p>
 
 
 
