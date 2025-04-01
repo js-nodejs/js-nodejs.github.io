@@ -214,6 +214,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="hosting/intro/" class="md-tabs__link">
+          
+  
+  
+  Hosting
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -394,6 +414,77 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Hosting
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hosting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hosting/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intro
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -442,6 +533,24 @@
   <a href="#venv-vs-pipenv" class="md-nav__link">
     <span class="md-ellipsis">
       venv vs. Pipenv
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-highlight" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Highlight
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-hightlight-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Hightlight 2
     </span>
   </a>
   
@@ -573,6 +682,126 @@ docs/
 </ul>
 </details>
 <p>Pipenv gives you a more streamlined experience for handling both virtual environments and dependencies. It's useful for teams or larger projects where dependency management and consistency are crucial.</p>
+<hr />
+<h2 id="code-highlight">Code Highlight</h2>
+<div class="language-js highlight"><span class="filename">javascript</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nx">signalRService</span><span class="p">.</span><span class="nx">startConnection</span><span class="p">();</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nx">signalRService</span><span class="p">.</span><span class="nx">stopConnection</span><span class="p">();</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="p">};</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">},</span><span class="w"> </span><span class="p">[]);</span>
+</span></code></pre></div>
+<details class="question" open="open">
+<summary>What does it do?</summary>
+<ul>
+<li>
+<p><strong><code>useEffect</code> hook</strong>: This React hook is used to run side effects in functional components. The second argument, <code>[]</code>, means that the effect will run once, right after the component is mounted (i.e., when the component is added to the DOM). This is similar to <code>componentDidMount</code> in class components.</p>
+</li>
+<li>
+<p><code>signalRService.startConnection()</code>: This line starts a connection to the SignalR server, which is usually used for real-time communication in web applications (like for receiving real-time updates from a server, such as messages, notifications, etc.).</p>
+</li>
+<li>
+<p><strong>The <code>return</code> statement inside <code>useEffect</code></strong>: The function inside the <code>return</code> is a <mark>cleanup function</mark>, and it's called when the component is about to unmount or before the effect is re-executed (but in this case, it will only be run once when the component unmounts, since <code>[]</code> is passed as the dependency array).</p>
+</li>
+<li>
+<p><code>signalRService.stopConnection()</code>: This stops the connection to the SignalR server when the component is unmounted. It’s important to stop the connection to prevent memory leaks or unnecessary network traffic when the component is no longer in use.</p>
+</li>
+</ul>
+</details>
+<p><strong>Does it stop the connection after success?</strong></p>
+<p>Not exactly. The <mark>connection is started</mark> when the component is mounted (<code>signalRService.startConnection()</code>), and <mark>it will be stopped</mark> when the component is unmounted (<code>signalRService.stopConnection()</code>).</p>
+<p>The connection is not immediately stopped after it's started. It remains active while the component is mounted, and only when the component is about to be unmounted (i.e., removed from the DOM) will the <code>stopConnection</code> function be triggered. This ensures that the SignalR connection is only open while the component is actively in use and will be cleaned up when the component is no longer needed.</p>
+<hr />
+<h2 id="code-hightlight-2">Code Hightlight 2</h2>
+<div class="language-js highlight"><span class="filename">javascrip</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">post</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;https://jsonplaceholder.typicode.com/posts/1&quot;</span><span class="p">);</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span>
+</span></code></pre></div>
+<details class="note" open="open">
+<summary>Explanation of the Code:</summary>
+<ol>
+<li>
+<p><code>fetch()</code>:</p>
+<ul>
+<li><code>fetch()</code> is an asynchronous function that makes an HTTP request to the specified URL and returns a <code>Promise</code>. This promise resolves to the <code>Response</code> object, which represents the entire response (headers, status, body, etc.).</li>
+</ul>
+</li>
+<li>
+<p><code>await</code>:</p>
+<ul>
+<li>The <code>await</code> keyword is used to pause the execution of the code until the <code>fetch()</code> promise resolves. This means that the variable <code>post</code> will contain the resolved value of the <code>fetch()</code> promise, which is a <code>Response</code> object.</li>
+</ul>
+</li>
+<li>
+<p><code>console.log(post)</code>:</p>
+<ul>
+<li>The <code>post</code> variable will now hold a <code>Response</code> object, not the actual data (i.e., the content of the post). This <code>Response</code> object contains metadata like the HTTP status, headers, etc.</li>
+</ul>
+</li>
+</ol>
+</details>
+<p><strong>What Does <code>console.log(post)</code> Return?</strong></p>
+<p>The output of <code>console.log(post)</code> will be a <code>Response</code> object that looks something like this:</p>
+<div class="language-js highlight"><span class="filename">javascript</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">Response</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;basic&quot;</span><span class="p">,</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://jsonplaceholder.typicode.com/posts/1&quot;</span><span class="p">,</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nx">redirected</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="mf">200</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nx">statusText</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="nx">Headers</span><span class="w"> </span><span class="p">{},</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">ReadableStream</span><span class="w"> </span><span class="p">{...},</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">  </span><span class="nx">bodyUsed</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<details class="note" open="open">
+<summary>Key Properties of the <code>Response</code> Object:</summary>
+<ul>
+<li>
+<p><code>status</code>: The HTTP status code (200 means success).</p>
+</li>
+<li>
+<p><code>statusText</code>: A short description of the status code (e.g., "OK" for 200).</p>
+</li>
+<li>
+<p><code>ok</code>: A boolean indicating whether the status code is in the 200-299 range (i.e., successful response).</p>
+</li>
+<li>
+<p><code>url</code>: The URL of the response.</p>
+</li>
+<li>
+<p><code>headers</code>: The headers of the response.</p>
+</li>
+<li>
+<p><code>body</code>: A <code>ReadableStream</code> representing the body of the response (this is not directly readable).</p>
+</li>
+</ul>
+</details>
+<p><strong>Why is this the result?</strong></p>
+<p><code>fetch()</code> <mark>does not</mark> automatically parse the body of the response into JSON or any other format. It simply returns a <code>Response</code> object. To get the actual data (like the post content), you need to call the <code>.json()</code> method (or <code>.text()</code>, <code>.blob()</code>, etc., depending on the response type) to extract and parse the body of the response.</p>
+<p>For example, to extract the JSON body, you would write:</p>
+<div class="language-js highlight"><span class="filename">javascript</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">post</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;https://jsonplaceholder.typicode.com/posts/1&quot;</span><span class="p">);</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">postData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">post</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span><span class="w"> </span><span class="c1">// This parses the response body as JSON</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">postData</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Now, <code>console.log(postData)</code> would return something like:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">&quot;userId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sunt aut facere repellat provident occaecati excepturi optio reprehenderit&quot;</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quia et suscipit\nsuscipit ...&quot;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<details class="tips" open="open">
+<summary>Conclusion:</summary>
+<ul>
+<li>
+<p>The original <code>console.log(post)</code> just logs the <code>Response</code> object, which contains metadata about the response.</p>
+</li>
+<li>
+<p>To get the actual data (e.g., the post content), you need to parse the response with <code>.json()</code> or another method suitable for the response type.</p>
+</li>
+</ul>
+</details>
 
 
 
